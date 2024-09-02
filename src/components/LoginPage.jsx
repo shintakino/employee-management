@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 const LoginPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
@@ -23,7 +24,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="login-page">
+    <div className="container login-page">
       <h2>Login</h2>
       <form onSubmit={handleLogin}>
         <div>
@@ -38,11 +39,20 @@ const LoginPage = () => {
         <div>
           <label>Password</label>
           <input
-            type="password"
+            type={showPassword ? 'text' : 'password'}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
+          <div>
+            <input
+              type="checkbox"
+              id="show-password"
+              checked={showPassword}
+              onChange={() => setShowPassword(!showPassword)}
+            />
+            <label htmlFor="show-password">Show Password</label>
+          </div>
         </div>
         {error && <p className="error">{error}</p>}
         <button type="submit">Login</button>

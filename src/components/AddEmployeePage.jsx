@@ -9,7 +9,16 @@ const AddEmployeePage = ({ employees, addEmployee }) => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const validateName = (name) => /^[a-zA-Z]+$/.test(name);
+  const validateName = (name) => /^[a-zA-Z\s]+$/.test(name);
+
+  const isUniqueEmployee = (newEmployee) => {
+    return !employees.some(
+      (employee) =>
+        employee.id === newEmployee.id ||
+        (employee.firstName === newEmployee.firstName && 
+         employee.lastName === newEmployee.lastName)
+    );
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,21 +29,23 @@ const AddEmployeePage = ({ employees, addEmployee }) => {
     }
 
     if (!validateName(firstName) || !validateName(lastName)) {
-      setError('First name and last name should contain only letters.');
+      setError('First name and last name should contain only letters and spaces.');
       return;
     }
 
-    if (employees.some(employee => employee.id === id)) {
-      setError('Employee ID must be unique.');
+    const newEmployee = { id, firstName, lastName, position };
+
+    if (!isUniqueEmployee(newEmployee)) {
+      setError('An employee with this ID or name already exists.');
       return;
     }
 
-    addEmployee({ id, firstName, lastName, position });
+    addEmployee(newEmployee);
     navigate('/employees');
   };
 
   return (
-    <div className="add-employee-page">
+    <div className="container add-employee-page">
       <h2>Add Employee</h2>
       <form onSubmit={handleSubmit}>
         <div>

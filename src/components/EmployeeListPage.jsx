@@ -5,7 +5,7 @@ const EmployeeListPage = ({ employees }) => {
   const navigate = useNavigate();
 
   return (
-    <div className="employee-list-page">
+    <div className="container employee-list-page">
       <h2>Employees List</h2>
       <table>
         <thead>

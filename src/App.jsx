@@ -6,8 +6,11 @@ import AddEmployeePage from './components/AddEmployeePage';
 
 function App() {
   const [employees, setEmployees] = useState([
-    { id: '1', firstName: 'John', lastName: 'Doe', position: 'Manager' },
-    { id: '2', firstName: 'Jane', lastName: 'Smith', position: 'Developer' },
+    { id: '1', firstName: 'Juan', lastName: 'Dela Cruz', position: 'Manager' },
+    { id: '2', firstName: 'Maria', lastName: 'Santos', position: 'Developer' },
+    { id: '3', firstName: 'Jose', lastName: 'Rizal', position: 'Designer' },
+    { id: '4', firstName: 'Ana', lastName: 'Mendoza', position: 'Accountant' },
+    { id: '5', firstName: 'Pedro', lastName: 'Alcantara', position: 'Sales' }
   ]);
 
   const addEmployee = (employee) => {
