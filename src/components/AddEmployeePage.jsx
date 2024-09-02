@@ -7,6 +7,7 @@ const AddEmployeePage = ({ employees, addEmployee }) => {
   const [position, setPosition] = useState('');
   const [id, setId] = useState('');
   const [error, setError] = useState('');
+  const [confirmation, setConfirmation] = useState(''); 
   const navigate = useNavigate();
 
   const validateName = (name) => /^[a-zA-Z\s]+$/.test(name);
@@ -41,7 +42,11 @@ const AddEmployeePage = ({ employees, addEmployee }) => {
     }
 
     addEmployee(newEmployee);
-    navigate('/employees');
+    setConfirmation('Employee added successfully!'); 
+    setError(''); 
+    setTimeout(() => {
+      navigate('/employees');
+    }, 2000); 
   };
 
   return (
@@ -85,6 +90,7 @@ const AddEmployeePage = ({ employees, addEmployee }) => {
           />
         </div>
         {error && <p className="error">{error}</p>}
+        {confirmation && <p className="confirmation">{confirmation}</p>} {/* Display confirmation message */}
         <button type="submit">Add Employee</button>
       </form>
     </div>
